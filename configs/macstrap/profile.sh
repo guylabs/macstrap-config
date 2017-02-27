@@ -55,13 +55,13 @@ source $ZSH/oh-my-zsh.sh
 # Gradle configuration #
 ########################
 
-export GRADLE_OPTS="-Xmx2048m -Xms256m -XX:MaxPermSize=512m"
+export GRADLE_OPTS="-Xmx2048m -Xms256m"
 
 #####################
 # NVM configuration #
 #####################
 
-export NVM_DIR=~/.nvm
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # export Google Chrome and Firefox binaries used for Karma tests as karma is not
@@ -73,5 +73,6 @@ export FIREFOX_BIN="~/Applications/Firefox.app/Contents/MacOS/firefox"
 # jEnv configuration #
 ######################
 
-export PATH=$HOME/.jenv/bin:$PATH
+# Export jEnv root variable. See https://github.com/gcuisinier/jenv/wiki/Trouble-Shooting
+export JENV_ROOT=/usr/local/opt/jenv
 eval "$(jenv init -)"

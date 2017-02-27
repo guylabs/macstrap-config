@@ -130,6 +130,9 @@ echo -e "\t- Enabling snap-to-grid for icons on the desktop and in other icon vi
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
+# Kill all finder instances to reload the new configuration
+killall Finder
+
 ###############################################################################
 # Dock & Mission Control
 ###############################################################################

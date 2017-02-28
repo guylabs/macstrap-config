@@ -55,6 +55,13 @@ if test $(which upgrade_oh_my_zsh); then
   upgrade_oh_my_zsh
 fi
 
+# update App Store apps
+if test $(which mas); then
+  echo -e "Updating App Store apps ..."
+  echo
+  mas upgrade
+fi
+
 # cleanup
 echo -e "Cleaning up homebrew ..."
 echo

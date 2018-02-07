@@ -27,34 +27,6 @@ if test $(which apm); then
   apm upgrade
 fi
 
-# update npm packages
-if test $(which npm); then
-  echo -e "Updating npm global packages ..."
-  echo
-  npm update -g
-fi
-
-# update nvm
-if test $(which nvm); then
-  echo -e "Updating NVM ..."
-  echo
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
-fi
-
-# update jEnv
-if test $(which jenv); then
-  echo -e "Updating jEnv ..."
-  echo
-  cd ~/.jenv/ && git pull
-fi
-
-# update oh-my-zsh
-if test $(which upgrade_oh_my_zsh); then
-  echo -e "Updating oh-my-zsh ..."
-  echo
-  upgrade_oh_my_zsh
-fi
-
 # update App Store apps
 if test $(which mas); then
   echo -e "Updating App Store apps ..."

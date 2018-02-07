@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Initialize jEnv
+eval "$(jenv init -)"
+
+# Update the number of open files
+ulimit -n 5000

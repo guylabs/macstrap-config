@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -e
 
-# TODO: use mackup to backup the configurations
-echo "Backup is not implemented in version $macstrapVersion"
+echo -e "Backing up configuration with mackup..."
+mackup backup

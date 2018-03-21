@@ -33,3 +33,9 @@ fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# GPG configuration
+
+# In order for gpg to find gpg-agent, gpg-agent must be running.
+# The following line sets up gpg-agent to run automatically for every shell
+gpg-agent --daemon

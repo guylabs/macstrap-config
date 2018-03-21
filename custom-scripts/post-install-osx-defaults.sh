@@ -114,15 +114,6 @@ echo
 echo -e "\t- Disable hibernation (speeds up entering sleep mode)"
 sudo pmset -a hibernatemode 0
 
-echo -e "\t- Remove the sleep image file to save disk space"
-if [ -e "/private/var/vm/sleepimage" ]; then
-  sudo rm /private/var/vm/sleepimage
-  # Create a zero-byte file instead…
-  sudo touch /private/var/vm/sleepimage
-  # …and make sure it can’t be rewritten
-  sudo chflags uchg /private/var/vm/sleepimage
-fi
-
 ###############################################################################
 echo
 echo -e "\t Trackpad, mouse, keyboard, Bluetooth accessories, and input"
@@ -152,8 +143,8 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-echo -e "\t- Disable “natural” (Lion-style) scrolling"
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+echo -e "\t- Enable “natural” (Lion-style) scrolling"
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 echo -e "\t- Use scroll gesture with the Ctrl (^) modifier key to zoom"
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
@@ -475,9 +466,24 @@ echo -e "\t- Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app"
 defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 
 echo -e "\t- Display emails in threaded mode, sorted by date (newest at the top)"
+defaults write com.apple.mail InboxViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+defaults write com.apple.mail InboxViewerAttributes -dict-add "SortedDescending" -string "no"
+defaults write com.apple.mail InboxViewerAttributes -dict-add "SortOrder" -string "received-date"
+
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
+defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "no"
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
+
+defaults write com.apple.mail ArchiveViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+defaults write com.apple.mail ArchiveViewerAttributes -dict-add "SortedDescending" -string "no"
+defaults write com.apple.mail ArchiveViewerAttributes -dict-add "SortOrder" -string "received-date"
+
+echo -e "\t- Display emails sorted by date (newest at the top) inside a thread"
+defaults write com.apple.mail ConversationViewSortDescending -int 1
+
+echo -e "\t- Do not play mail sounds"
+defaults write com.apple.mail PlayMailSounds -int 0
+defaults write com.apple.mail NewMessagesSoundName -string ""
 
 echo -e "\t- Disable inline attachments (just show the icons)"
 defaults write com.apple.mail DisableInlineAttachmentViewing -bool true

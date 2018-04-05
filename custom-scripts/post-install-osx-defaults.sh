@@ -436,12 +436,6 @@ defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
 echo -e "\t- Warn about fraudulent websites"
 defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
 
-echo -e "\t- Disable auto-playing video"
-defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-
 echo -e "\t- Enable 'Do Not Track'"
 defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 

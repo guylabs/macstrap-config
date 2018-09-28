@@ -38,6 +38,15 @@ installAppOrBinary() {
   fi
 }
 
+# rename symlink
+renameSymlink() {
+  if [ ! -L "$2" ]; then
+    mv "$2" "$2.backup"
+    ln -s "$1" "$2"
+    echo -e "  - Renamed it to \033[1m$2.backup\033[0m"
+  fi
+}
+
 # symlink a file if it does not exist
 symlinkFile() {
   if [ ! -e "$2" ]; then
@@ -45,6 +54,7 @@ symlinkFile() {
     echo -e "Symlinked file from \033[1m$1\033[0m to \033[1m$2\033[0m"
   else
     echo -e "Could not symlink file from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
+    renameSymlink "$1" "$2"
   fi
 }
 
@@ -55,6 +65,7 @@ symlinkDirectory() {
     echo -e "Symlinked directory from \033[1m$1\033[0m to \033[1m$2\033[0m"
   else
     echo -e "Could not symlink directory from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
+    renameSymlink "$1" "$2"
   fi
 }
 
@@ -67,7 +78,7 @@ brew update
 source $macstrapConfigFile
 
 # Install apps
-if [ ${#apps} -gt 0 ]; then
+if [[ ${apps[@]:+${apps[@]}} ]]; then
     echo -e "Installing apps ..."
     for item in "${apps[@]}"
     do
@@ -78,7 +89,7 @@ else
 fi
 
 # Install binaries
-if [ ${#binaries} -gt 0 ]; then
+if [[ ${binaries[@]:+${binaries[@]}} ]]; then
     echo -e "Installing binaries ..."
     for item in "${binaries[@]}"
     do
@@ -91,8 +102,12 @@ fi
 # Install mas - https://github.com/mas-cli/mas
 brew install mas
 
+echo
+echo -e "Please manually sign in into the App Store to be able to install the App Store apps. When done, press Enter to continue..."
+read -e
+
 # Install App Store apps
-if [ ${#appStoreApps} -gt 0 ]; then
+if [[ ${appStoreApps[@]:+${appStoreApps[@]}} ]]; then
     echo -e "Installing App Store apps ..."
     for item in "${appStoreApps[@]}"
     do
@@ -106,5 +121,3 @@ fi
 echo -e "Cleanup homebrew and homebrew cask ..."
 echo
 brew cleanup
-brew cask cleanup
-

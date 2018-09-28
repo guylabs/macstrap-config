@@ -18,7 +18,7 @@ echo -e "Updating the apps and binaries ..."
 echo
 brew update
 brew upgrade
-brew upgrade brew-cask || true
+brew cask upgrade
 
 # update atom packages
 if test $(which apm); then
@@ -38,4 +38,3 @@ fi
 echo -e "Cleaning up homebrew ..."
 echo
 brew cleanup
-brew cask cleanup

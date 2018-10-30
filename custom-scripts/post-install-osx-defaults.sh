@@ -157,12 +157,6 @@ case $applyConfiguration in
         echo -e "\t- Enable “natural” (Lion-style) scrolling"
         defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
-        echo -e "\t- Use scroll gesture with the Ctrl (^) modifier key to zoom"
-        defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-        defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
-        # Follow the keyboard focus while zoomed in
-        defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
-
         echo -e "\t- Set language and text formats"
         # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
         # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
@@ -502,10 +496,6 @@ case $applyConfiguration in
         echo -e "\t #################################"
         echo
         ###############################################################################
-
-        echo -e "\t- Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed before."
-        # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-        sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
         echo -e "\t- Change indexing order and disable some search results"
         # Yosemite-specific search results (remove them if you are using macOS 10.9 or older):

@@ -20,15 +20,8 @@ brew update
 brew upgrade
 brew cask upgrade
 
-# update atom packages
-if test $(which apm); then
-  echo -e "Updating atom packages ..."
-  echo
-  apm upgrade
-fi
-
 # update App Store apps
-if test $(which mas); then
+if test $(hash mas); then
   echo -e "Updating App Store apps ..."
   echo
   mas upgrade

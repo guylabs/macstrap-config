@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
 # Show banner
 echo
@@ -100,7 +100,7 @@ else
 fi
 
 # The installation of mas can be skipped. This is used in CI environments where there is no possibility to login to the app store manually.
-if [[ "$MACSTRAP_WITHOUT_MAS" = "true" ]]; then
+if [[ -z "$MACSTRAP_WITHOUT_MAS" ]]; then
 
     # Install mas - https://github.com/mas-cli/mas
     brew install mas

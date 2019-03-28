@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/guylabs/macstrap.svg?branch=master)](https://travis-ci.org/guylabs/macstrap)
+
 # macstrap-config
 Default configuration repository for [macstrap](https://github.com/guylabs/macstrap). Please check the individual `README.md` in each folder to get more information about the structure of the macstrap configuration.
 

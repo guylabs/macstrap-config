@@ -18,7 +18,7 @@ echo -n "Enter your decision: "
 echo
 
 # The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
-if [[ -z "$MACSTRAP_APPLY_OSX_CONFIGURATION" ]]; then
+if [[ -z "$CI" ]]; then
   read -e applyConfiguration
 else
   applyConfiguration="1"
@@ -43,7 +43,7 @@ case $applyConfiguration in
 
 
         # The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
-        if [[ -z "$MACSTRAP_WITHOUT_HOSTNAME" ]]; then
+        if [[ -z "$CI" ]]; then
             # Set computer name (as done via System Preferences → Sharing)
             echo -n "Enter the hostname: "
             echo
@@ -555,24 +555,29 @@ case $applyConfiguration in
         echo -e "\t- Only use UTF-8 in Terminal.app"
         defaults write com.apple.terminal StringEncodings -array 4
 
-        echo -e "\t- Use a modified version of the Solarized Dark theme by default in Terminal.app"
-        osascript -e '
-        tell application "Terminal"
+        # Only apply a custom terminal theme if not in CI, as on CI the command times out.
+        if [[ -z "$CI" ]]; then
 
-        	set themeName to "Solarized Dark xterm-256color"
+            echo -e "\t- Use a modified version of the Solarized Dark theme by default in Terminal.app"
+            osascript -e '
+            tell application "Terminal"
 
-        	(* Open the custom theme so that it gets added to the list
-        	   of available terminal themes (note: this will open two
-        	   additional terminal windows). *)
-        	do shell script "open \"$HOME/init/" & themeName & ".terminal\""
+                set themeName to "Solarized Dark xterm-256color"
 
-        	(* Wait a little bit to ensure that the custom theme is added. *)
-        	delay 1
+                (* Open the custom theme so that it gets added to the list
+                of available terminal themes (note: this will open two
+                additional terminal windows). *)
+                do shell script "open \"$HOME/init/" & themeName & ".terminal\""
 
-        	(* Set the custom theme as the default terminal theme. *)
-        	set default settings to settings set themeName
+                (* Wait a little bit to ensure that the custom theme is added. *)
+                delay 1
 
-        end tell'
+                (* Set the custom theme as the default terminal theme. *)
+                set default settings to settings set themeName
+
+            end tell'
+
+        fi
 
         echo -e "\t- Enable Secure Keyboard Entry in Terminal.app"
         # See: https://security.stackexchange.com/a/47786/8918

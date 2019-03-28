@@ -100,7 +100,7 @@ else
 fi
 
 # The installation of mas can be skipped. This is used in CI environments where there is no possibility to login to the app store manually.
-if [[ -z "$MACSTRAP_WITHOUT_MAS" ]]; then
+if [[ -z "$CI" ]]; then
 
     # Install mas - https://github.com/mas-cli/mas
     brew install mas

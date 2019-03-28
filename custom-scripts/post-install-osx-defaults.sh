@@ -32,10 +32,7 @@ case $applyConfiguration in
 
         # Ask for the administrator password upfront
         echo -e "We need sudo right to set some Mac OS X defaults."
-        sudo -v
-
-        # Keep-alive: update existing `sudo` time stamp until macstrap has finished
-        while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+        sudo true
 
         ###############################################################################
         echo

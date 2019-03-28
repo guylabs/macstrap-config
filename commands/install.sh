@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 # Show banner
 echo
@@ -99,12 +99,17 @@ else
     echo -e "No binaries defined in macstrap configuration."
 fi
 
-# Install mas - https://github.com/mas-cli/mas
-brew install mas
+# The installation of mas can be skipped. This is used in CI environments where there is no possibility to login to the app store manually.
+if [[ -z "${MACSTRAP_WITHOUT_MAS}"] ]; then
 
-echo
-echo -e "Please manually sign in into the App Store to be able to install the App Store apps. When done, press Enter to continue..."
-read -e
+    # Install mas - https://github.com/mas-cli/mas
+    brew install mas
+
+    echo
+    echo -e "Please manually sign in into the App Store to be able to install the App Store apps. When done, press Enter to continue..."
+    read -e
+
+fi
 
 # Install App Store apps
 if [[ ${appStoreApps[@]:+${appStoreApps[@]}} ]]; then

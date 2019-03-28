@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 export JENV_ROOT=/usr/local/opt/jenv
 

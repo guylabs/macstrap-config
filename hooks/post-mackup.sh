@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 symlinkFile "$macstrapConfigFolder/configs/mackup/.mackup.cfg" "$HOME/.mackup.cfg"

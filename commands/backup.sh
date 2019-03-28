@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 echo -e "Backing up configuration with mackup..."
 mackup backup

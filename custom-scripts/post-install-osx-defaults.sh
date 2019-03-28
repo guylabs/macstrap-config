@@ -17,7 +17,10 @@ echo
 echo -n "Enter your decision: "
 echo
 
-read -e applyConfiguration
+# The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
+if [[ -z "$MACSTRAP_APPLY_OSX_CONFIGURATION" ]]; then
+  read -e applyConfiguration
+fi
 
 case $applyConfiguration in
     "1")
@@ -39,17 +42,22 @@ case $applyConfiguration in
         echo
         ###############################################################################
 
-        # Set computer name (as done via System Preferences → Sharing)
-        echo -n "Enter the hostname: "
-        echo
 
-        # read the hostname
-        read -e hostname
+        # The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
+        if [[ -z "$MACSTRAP_WITHOUT_HOSTNAME" ]]; then
+            # Set computer name (as done via System Preferences → Sharing)
+            echo -n "Enter the hostname: "
+            echo
 
-        sudo scutil --set ComputerName $hostname
-        sudo scutil --set HostName $hostname
-        sudo scutil --set LocalHostName $hostname
-        sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $hostname
+            # read the hostname
+            read -e hostname
+
+            sudo scutil --set ComputerName $hostname
+            sudo scutil --set HostName $hostname
+            sudo scutil --set LocalHostName $hostname
+            sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $hostname
+        fi
+
 
         echo -e "\t- Set standby delay to 24 hours (default is 1 hour)"
         sudo pmset -a standbydelay 86400

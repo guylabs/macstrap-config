@@ -20,6 +20,8 @@ echo
 # The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
 if [[ -z "$MACSTRAP_APPLY_OSX_CONFIGURATION" ]]; then
   read -e applyConfiguration
+else
+  applyConfiguration="1"
 fi
 
 case $applyConfiguration in

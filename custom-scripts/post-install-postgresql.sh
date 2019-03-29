@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Unlink the already installed postgresql on CI.
 if [[ ! -z "$CI" ]]; then
-  brew unlink postgresql
+  brew uninstall postgresql
 fi
 
 # Tap versioned PostgreSQL repository see https://github.com/petere/homebrew-postgresql

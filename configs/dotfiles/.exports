@@ -21,4 +21,6 @@ export MANPAGER='less -X';
 
 # Export jEnv root variable. See https://github.com/gcuisinier/jenv/wiki/Trouble-Shooting
 export JENV_ROOT=/usr/local/opt/jenv
-eval "$(jenv init -)"
+
+# Export NVM root directory
+export NVM_DIR="$HOME/.nvm"

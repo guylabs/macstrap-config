@@ -8,3 +8,6 @@ export PATH=/usr/local/opt/ruby/bin:$PATH
 
 # Use gnu tools instead
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+
+# Add Google Chrome driver to the path
+export PATH=$HOME/.gradle/webdriver/chromedriver:$PATH 

@@ -5,3 +5,7 @@ eval "$(jenv init -)"
 
 # Update the number of open files
 ulimit -n 5000
+
+# Initialize NVM
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion" 

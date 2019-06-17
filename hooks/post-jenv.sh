@@ -16,6 +16,9 @@ if hash jenv > /dev/null; then
   # Add Java 11
   jenv add $(/usr/libexec/java_home -v 11)
 
+  # Add Java 12
+  jenv add $(/usr/libexec/java_home -v 12)
+
   # Set the Java 8 as global Java
   jenv global 1.8
 

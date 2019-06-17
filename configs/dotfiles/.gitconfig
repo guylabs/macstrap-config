@@ -159,6 +159,11 @@
 	# Enable diff3 for merge conflicts
 	conflictstyle = diff3
 
+[pull]
+
+	# Rebase by default when executing a `git pull`
+    rebase = true
+
 [push]
 
 	# Make `git push` push relevant annotated tags when pushing branches out.

@@ -26,7 +26,7 @@ export JENV_ROOT=/usr/local/opt/jenv
 export NVM_DIR="$HOME/.nvm"
 
 # Export JDK environment variable used for build
-export JDK12=`/usr/libexec/java_home -v 12`
+export JDK13=`/usr/libexec/java_home -v 13`
 export JDK11=`/usr/libexec/java_home -v 11`
 export JDK9=`/usr/libexec/java_home -v 9`
 export JDK8=`/usr/libexec/java_home -v 1.8`

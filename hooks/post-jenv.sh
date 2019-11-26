@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+set -euo
 
 export JENV_ROOT=/usr/local/opt/jenv
 
@@ -8,17 +8,17 @@ if hash jenv > /dev/null; then
   eval "$(jenv init -)"
 
   # Add Java 8
-  jenv add $(/usr/libexec/java_home -v 1.8)
+  jenv add "$(/usr/libexec/java_home -v 1.8)"
 
   # Add Java 11
-  jenv add $(/usr/libexec/java_home -v 11)
+  jenv add "$(/usr/libexec/java_home -v 11)"
 
-  # Add Java 13
-  jenv add $(/usr/libexec/java_home -v 13)
+  # Add Java 12
+  jenv add "$(/usr/libexec/java_home -v 12)"
 
   # Enable export plugin for JAVA_HOME
   jenv enable-plugin export
 
 else
-  echo -e "\033[0;33mWARN: jEnv not installed as the ~/.jenv folder is already present.\033[1;34m"
+  echo "\033[0;33mWARN: jEnv not installed as the ~/.jenv folder is already present.\033[1;34m"
 fi

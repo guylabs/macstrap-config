@@ -21,4 +21,5 @@ From this link you can extract the `id` which is the number after the `id` strin
 macstrap is available under the [MIT license](https://github.com/guylabs/macstrap/blob/master/LICENSE).
 
 (c) Guy Brand
-(c) Ethan Schoonover - Solarized iTerm2 theme (https://github.com/altercation/solarized)
+(c) [Afterglow VIM theme](https://github.com/danilo-augusto/vim-afterglow)
+(c) [Afterglow Terminal theme](https://github.com/lysyi3m/macos-terminal-themes)

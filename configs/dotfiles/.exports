@@ -1,13 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Make vim the default editor.
 export EDITOR='vim';
-
-# Increase Bash history size. Allow 32³ entries; the default is 500.
-export HISTSIZE='32768';
-export HISTFILESIZE="${HISTSIZE}";
-# Omit duplicates and commands that begin with a space from history.
-export HISTCONTROL='ignoreboth';
 
 # Prefer US English and use UTF-8.
 export LANG='en_US.UTF-8';
@@ -26,7 +20,6 @@ export JENV_ROOT=/usr/local/opt/jenv
 export NVM_DIR="$HOME/.nvm"
 
 # Export JDK environment variable used for build
-export JDK13=`/usr/libexec/java_home -v 13`
-export JDK11=`/usr/libexec/java_home -v 11`
-export JDK9=`/usr/libexec/java_home -v 9`
-export JDK8=`/usr/libexec/java_home -v 1.8`
+export JDK12=$(/usr/libexec/java_home -v 12)
+export JDK11=$(/usr/libexec/java_home -v 11)
+export JDK8=$(/usr/libexec/java_home -v 1.8)

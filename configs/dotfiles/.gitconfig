@@ -178,3 +178,6 @@
 
     # Check all fetched objects and abort in the case of a malformed object or a broken link
     fsckobjects = true
+
+[user]
+	signingkey = 1F17672CC49C9A3F

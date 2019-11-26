@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Export PATH
 export PATH=/usr/local/bin:$HOME/bin:/usr/local/sbin:$PATH

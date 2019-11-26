@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
-set -eo pipefail
+#!/bin/sh
+set -eo
 
 # Show banner
 echo
-echo -e "##############################"
-echo -e "# Installing your system ... #"
-echo -e "##############################"
+echo "##############################"
+echo "# Installing your system ... #"
+echo "##############################"
 echo
 
 # installs the app or binary with the according hooks
@@ -14,27 +14,29 @@ installAppOrBinary() {
   preScript="$macstrapConfigFolder/hooks/pre-$1.sh"
   if [ -e "$preScript" ]; then
     echo
-    echo -e "Executing \033[1m$preScript\033[0m ..."
+    echo "Executing \033[1m$preScript\033[0m ..."
     echo
-    source $preScript
+    # shellcheck source=preScript.sh
+    . "$preScript"
   fi
 
   # install the app or binary
   if [ "$2" = "cask" ]; then
-      brew cask install $1
+      brew cask install "$1"
   elif [ "$2" = "appStore" ]; then
-      mas install $1
+      mas install "$1"
   else
-      brew install $1
+      brew install "$1"
   fi
 
   # execute the post scripts
   postScript="$macstrapConfigFolder/hooks/post-$1.sh"
   if [ -e "$postScript" ]; then
     echo
-    echo -e "Executing \033[1m$postScript\033[0m ..."
+    echo "Executing \033[1m$postScript\033[0m ..."
     echo
-    source $postScript
+    # shellcheck source=postScript.sh
+    . "$postScript"
   fi
 }
 
@@ -43,7 +45,7 @@ renameSymlink() {
   if [ ! -L "$2" ]; then
     mv "$2" "$2.backup"
     ln -s "$1" "$2"
-    echo -e "  - Renamed it to \033[1m$2.backup\033[0m"
+    echo "  - Renamed it to \033[1m$2.backup\033[0m"
   fi
 }
 
@@ -51,9 +53,9 @@ renameSymlink() {
 symlinkFile() {
   if [ ! -e "$2" ]; then
     ln -s "$1" "$2"
-    echo -e "Symlinked file from \033[1m$1\033[0m to \033[1m$2\033[0m"
+    echo "Symlinked file from \033[1m$1\033[0m to \033[1m$2\033[0m"
   else
-    echo -e "Could not symlink file from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
+    echo "Could not symlink file from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
     renameSymlink "$1" "$2"
   fi
 }
@@ -62,67 +64,68 @@ symlinkFile() {
 symlinkDirectory() {
   if [ ! -d "$2" ]; then
     ln -s "$1" "$2"
-    echo -e "Symlinked directory from \033[1m$1\033[0m to \033[1m$2\033[0m"
+    echo "Symlinked directory from \033[1m$1\033[0m to \033[1m$2\033[0m"
   else
-    echo -e "Could not symlink directory from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
+    echo "Could not symlink directory from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
     renameSymlink "$1" "$2"
   fi
 }
 
 # Update homebrew
-echo -e "Updating homebrew ..."
+echo "Updating homebrew ..."
 echo
 brew update
 
 # Source the configuration file
-source $macstrapConfigFile
+# shellcheck source=macstrapConfigFile.sh
+. "$macstrapConfigFile"
 
 # Install apps
-if [[ ${apps[@]:+${apps[@]}} ]]; then
-    echo -e "Installing apps ..."
+if [ ${apps[@]:+${apps[@]}} ]; then
+    echo "Installing apps ..."
     for item in "${apps[@]}"
     do
       installAppOrBinary "$item" "cask"
     done
 else
-    echo -e "No apps defined in macstrap configuration."
+    echo "No apps defined in macstrap configuration."
 fi
 
 # Install binaries
-if [[ ${binaries[@]:+${binaries[@]}} ]]; then
-    echo -e "Installing binaries ..."
+if [ ${binaries[@]:+${binaries[@]}} ]; then
+    echo "Installing binaries ..."
     for item in "${binaries[@]}"
     do
       installAppOrBinary "$item" ""
     done
 else
-    echo -e "No binaries defined in macstrap configuration."
+    echo "No binaries defined in macstrap configuration."
 fi
 
 # The installation of mas can be skipped. This is used in CI environments where there is no possibility to login to the app store manually.
-if [[ -z "$CI" ]]; then
+if [ -z "$CI" ]; then
 
     # Install mas - https://github.com/mas-cli/mas
     brew install mas
 
     echo
-    echo -e "Please manually sign in into the App Store to be able to install the App Store apps. When done, press Enter to continue..."
-    read -e
+    echo "Please manually sign in into the App Store to be able to install the App Store apps. When done, press Enter to continue..."
+    read -r
 
 fi
 
 # Install App Store apps
-if [[ ${appStoreApps[@]:+${appStoreApps[@]}} ]]; then
-    echo -e "Installing App Store apps ..."
+if [ ${appStoreApps[@]:+${appStoreApps[@]}} ]; then
+    echo "Installing App Store apps ..."
     for item in "${appStoreApps[@]}"
     do
       installAppOrBinary "$item" "appStore"
     done
 else
-    echo -e "No App Store apps defined in macstrap configuration."
+    echo "No App Store apps defined in macstrap configuration."
 fi
 
 # Remove outdated versions from the cellar
-echo -e "Cleanup homebrew and homebrew cask ..."
+echo "Cleanup homebrew and homebrew cask ..."
 echo
 brew cleanup

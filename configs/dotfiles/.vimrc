@@ -1,7 +1,9 @@
 " Use the Solarized Dark theme
 set background=dark
-colorscheme solarized
-let g:solarized_termtrans=1
+let g:afterglow_italic_comments=1
+let g:afterglow_inherit_background=1
+colorscheme afterglow
+let g:airline_theme='afterglow'
 
 " Make Vim more useful
 set nocompatible

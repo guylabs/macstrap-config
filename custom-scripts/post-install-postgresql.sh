@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh bash
+set -euo
 
 # Unlink the already installed postgresql on CI.
-if [[ ! -z "$CI" ]]; then
+if [ -n "$CI" ]; then
   brew uninstall --ignore-dependencies postgresql
 fi
 

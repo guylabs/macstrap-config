@@ -17,8 +17,8 @@ if hash jenv > /dev/null; then
   jenv add "$(/usr/libexec/java_home -v 12)"
 
   # Enable export plugin for JAVA_HOME
-  jenv enable-plugin export
+  jenv sh-enable-plugin export
 
 else
-  echo "\033[0;33mWARN: jEnv not installed as the ~/.jenv folder is already present.\033[1;34m"
+  echo "\033[0;33mWARN: jEnv not installed as the jenv is present already.\033[1;34m"
 fi

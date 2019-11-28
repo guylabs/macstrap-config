@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eo
+set -e
 
 if [ ! -d "$HOME/.nvm" ]; then
     mkdir "$HOME/.nvm"

@@ -1,5 +1,5 @@
 #!/bin/sh
-set -euo
+set -e
 
 code --force --install-extension marvinhagemeister.theme-afterglow-remastered
 code --force --install-extension joaompinto.asciidoctor-vscode

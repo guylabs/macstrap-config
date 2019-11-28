@@ -1,5 +1,5 @@
 #!/bin/sh
-set -euo
+set -e
 
 export JENV_ROOT=/usr/local/opt/jenv
 

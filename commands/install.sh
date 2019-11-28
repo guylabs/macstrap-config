@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eo
+set -e
 
 # Show banner
 echo
@@ -81,7 +81,7 @@ brew update
 . "$macstrapConfigFile"
 
 # Install apps
-if [ ${apps[@]:+${apps[@]}} ]; then
+if [ "${#apps[@]}" -gt 0 ]; then
     echo "Installing apps ..."
     for item in "${apps[@]}"
     do
@@ -92,7 +92,7 @@ else
 fi
 
 # Install binaries
-if [ ${binaries[@]:+${binaries[@]}} ]; then
+if [ "${#binaries[@]}" -gt 0 ]; then
     echo "Installing binaries ..."
     for item in "${binaries[@]}"
     do
@@ -115,7 +115,7 @@ if [ -z "$CI" ]; then
 fi
 
 # Install App Store apps
-if [ ${appStoreApps[@]:+${appStoreApps[@]}} ]; then
+if [ "${#appStoreApps[@]}" -gt 0  ]; then
     echo "Installing App Store apps ..."
     for item in "${appStoreApps[@]}"
     do

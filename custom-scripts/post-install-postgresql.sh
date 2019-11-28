@@ -1,5 +1,5 @@
-#!/bin/sh bash
-set -euo
+#!/bin/sh
+set -e
 
 # Unlink the already installed postgresql on CI.
 if [ -n "$CI" ]; then

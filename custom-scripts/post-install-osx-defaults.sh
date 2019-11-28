@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eo
+set -e
 
 # ~/.macos — https://mths.be/macos
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-set -euo
+set -e
 
 # Symlink all the dotfiles and folders to the home directory
 for item in $macstrapConfigFolder/configs/dotfiles/{.gnupg,.ssh,.vim,init,.bash_profile,.bashrc,.editorconfig,.gitconfig,.inputrc,.tmux,.vimrc}; do

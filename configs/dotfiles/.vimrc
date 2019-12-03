@@ -1,4 +1,4 @@
-" Use the Solarized Dark theme
+" Use the Afterglow theme
 set background=dark
 let g:afterglow_italic_comments=1
 let g:afterglow_inherit_background=1

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Enable colors
+autoload -U colors && colors
+
 # Turn off case sensitive globbing
 setopt NO_CASE_GLOB
 
@@ -54,9 +57,11 @@ zstyle ':completion:*' expand prefix suffix
 # Load bashcompinit for some old bash completions
 autoload bashcompinit && bashcompinit
 
+# Source macstrap files
 for file in ~/.macstrap/configs/dotfiles/.{aliases,exports,path,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && . "$file";
 done;
 unset file;
 
+# Start starship
 eval "$(starship init zsh)"

@@ -20,5 +20,5 @@ if hash jenv > /dev/null; then
   jenv sh-enable-plugin export
 
 else
-  echo "\033[0;33mWARN: jEnv not installed as the jenv is present already.\033[1;34m"
+  printf "\033[0;33mWARN: jEnv not installed as the jenv is present already.\033[1;34m\n"
 fi

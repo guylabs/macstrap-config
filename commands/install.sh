@@ -14,7 +14,7 @@ installAppOrBinary() {
   preScript="$macstrapConfigFolder/hooks/pre-$1.sh"
   if [ -e "$preScript" ]; then
     echo
-    echo "Executing \033[1m$preScript\033[0m ..."
+    printf "Executing \033[1m%s\033[0m ...\n" "$preScript"
     echo
     # shellcheck source=preScript.sh
     . "$preScript"
@@ -23,8 +23,6 @@ installAppOrBinary() {
   # install the app or binary
   if [ "$2" = "cask" ]; then
       brew cask install "$1"
-  elif [ "$2" = "appStore" ]; then
-      mas install "$1"
   else
       brew install "$1"
   fi
@@ -33,7 +31,7 @@ installAppOrBinary() {
   postScript="$macstrapConfigFolder/hooks/post-$1.sh"
   if [ -e "$postScript" ]; then
     echo
-    echo "Executing \033[1m$postScript\033[0m ..."
+    printf "Executing \033[1m%s\033[0m ...\n" "$postScript"
     echo
     # shellcheck source=postScript.sh
     . "$postScript"
@@ -45,7 +43,7 @@ renameSymlink() {
   if [ ! -L "$2" ]; then
     mv "$2" "$2.backup"
     ln -s "$1" "$2"
-    echo "  - Renamed it to \033[1m$2.backup\033[0m"
+    printf "  - Renamed it to \033[1m%s.backup\033[0m\n" "$2"
   fi
 }
 
@@ -53,9 +51,9 @@ renameSymlink() {
 symlinkFile() {
   if [ ! -e "$2" ]; then
     ln -s "$1" "$2"
-    echo "Symlinked file from \033[1m$1\033[0m to \033[1m$2\033[0m"
+    printf "Symlinked file from \033[1m%s\033[0m to \033[1m%s\033[0m\n" "$1" "$2"
   else
-    echo "Could not symlink file from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
+    printf "Could not symlink file from \033[1m%s\033[0m to \033[1m%s\033[0m as it already exists.\n" "$1" "$2"
     renameSymlink "$1" "$2"
   fi
 }
@@ -64,9 +62,9 @@ symlinkFile() {
 symlinkDirectory() {
   if [ ! -d "$2" ]; then
     ln -s "$1" "$2"
-    echo "Symlinked directory from \033[1m$1\033[0m to \033[1m$2\033[0m"
+    printf "Symlinked directory from \033[1m%s\033[0m to \033[1m%s\033[0m\n" "$1" "$2"
   else
-    echo "Could not symlink directory from \033[1m$1\033[0m to \033[1m$2\033[0m as it already exists."
+    printf "Could not symlink directory from \033[1m%s\033[0m to \033[1m%s\033[0m as it already exists.\n" "$1" "$2"
     renameSymlink "$1" "$2"
   fi
 }
@@ -100,29 +98,6 @@ if [ "${#binaries[@]}" -gt 0 ]; then
     done
 else
     echo "No binaries defined in macstrap configuration."
-fi
-
-# The installation of mas can be skipped. This is used in CI environments where there is no possibility to login to the app store manually.
-if [ -z "$CI" ]; then
-
-    # Install mas - https://github.com/mas-cli/mas
-    brew install mas
-
-    echo
-    echo "Please manually sign in into the App Store to be able to install the App Store apps. When done, press Enter to continue..."
-    read -r
-
-fi
-
-# Install App Store apps
-if [ "${#appStoreApps[@]}" -gt 0  ]; then
-    echo "Installing App Store apps ..."
-    for item in "${appStoreApps[@]}"
-    do
-      installAppOrBinary "$item" "appStore"
-    done
-else
-    echo "No App Store apps defined in macstrap configuration."
 fi
 
 # Remove outdated versions from the cellar

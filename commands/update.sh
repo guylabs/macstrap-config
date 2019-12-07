@@ -18,14 +18,7 @@ echo "Updating the apps and binaries ..."
 echo
 brew update
 brew upgrade
-brew cask upgrade
-
-# update App Store apps
-if test "$(hash mas)"; then
-  echo "Updating App Store apps ..."
-  echo
-  mas upgrade
-fi
+brew cask upgrade --greedy
 
 # cleanup
 echo "Cleaning up homebrew ..."

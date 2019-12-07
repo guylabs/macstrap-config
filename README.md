@@ -15,6 +15,8 @@ You can find all GUI applications on the [Brew Cask Github Repository](https://g
 
 macstrap is available under the [MIT license](https://github.com/guylabs/macstrap/blob/master/LICENSE).
 
-(c) Guy Brand
-(c) [Afterglow VIM theme](https://github.com/danilo-augusto/vim-afterglow)
-(c) [Afterglow Terminal theme](https://github.com/lysyi3m/macos-terminal-themes)
+&copy; Guy Brand
+
+&copy; [Afterglow VIM theme](https://github.com/danilo-augusto/vim-afterglow)
+
+&copy; [Afterglow Terminal theme](https://github.com/lysyi3m/macos-terminal-themes)

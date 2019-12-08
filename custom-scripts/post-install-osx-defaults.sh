@@ -556,23 +556,21 @@ case $applyConfiguration in
         if [ -z "$CI" ]; then
 
             printf "\t- Use a modified version of the Afterglow theme by default in Terminal.app\n"
-            osascript -e "
-            tell application \"Terminal\"
-
-                set themeName to \"Afterglow\"
+            osascript -e '
+            tell application "Terminal"
 
                 (* Open the custom theme so that it gets added to the list
                 of available terminal themes (note: this will open two
                 additional terminal windows). *)
-                do shell script \"open \"$HOME/init/\" & themeName & \".terminal\"\"
+                do shell script "open $HOME/init/Afterglow.terminal"
 
                 (* Wait a little bit to ensure that the custom theme is added. *)
                 delay 1
 
                 (* Set the custom theme as the default terminal theme. *)
-                set default settings to settings set themeName
+                set default settings to settings set "Afterglow"
 
-            end tell"
+            end tell'
 
         fi
 

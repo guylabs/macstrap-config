@@ -19,6 +19,9 @@ if hash jenv > /dev/null; then
   # Enable export plugin for JAVA_HOME
   jenv sh-enable-plugin export
 
+  # Set Java 11 as global default
+  jenv global 11.0
+
 else
   printf "\033[0;33mWARN: jEnv not installed as the jenv is present already.\033[1;34m\n"
 fi

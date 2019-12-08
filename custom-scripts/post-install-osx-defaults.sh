@@ -572,9 +572,6 @@ case $applyConfiguration in
                 (* Set the custom theme as the default terminal theme. *)
                 set default settings to settings set themeName
 
-                settings set default settings font name \"Fira Code Retina\"
-                settings set default settings font size 13
-
             end tell"
 
         fi

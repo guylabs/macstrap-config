@@ -1,5 +1,8 @@
 #!/bin/sh
 
+
+bindkey '^R' history-incremental-search-backward
+
 # Enable colors
 autoload -U colors && colors
 

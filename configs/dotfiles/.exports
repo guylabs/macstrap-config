@@ -23,3 +23,4 @@ export NVM_DIR="$HOME/.nvm"
 export JDK12=$(/usr/libexec/java_home -v 12)
 export JDK11=$(/usr/libexec/java_home -v 11)
 export JDK8=$(/usr/libexec/java_home -v 1.8)
+export JDK6=$(/usr/libexec/java_home -v 1.6)

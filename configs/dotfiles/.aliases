@@ -70,3 +70,6 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+# Fix https://github.com/petere/homebrew-postgresql/issues/49 by creating the folder before starting the cluster
+alias startpostgres="mkdir /usr/local/etc/postgresql/11/main/conf.d || pg_ctlcluster 11 main start"

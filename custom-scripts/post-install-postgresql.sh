@@ -18,6 +18,3 @@ brew install petere/postgresql/postgresql-common petere/postgresql/postgresql@11
 # Create the main cluster and the default postgres user
 pg_createcluster --locale en_US -e UTF-8 --start 11 main -- --auth=trust
 psql -d postgres -c 'CREATE USER postgres SUPERUSER;'
-
-# Fix https://github.com/petere/homebrew-postgresql/issues/49 by creating the folder before starting the cluster
-alias startpostgres="mkdir /usr/local/etc/postgresql/11/main/conf.d || pg_ctlcluster 11 main start"

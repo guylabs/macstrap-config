@@ -926,7 +926,7 @@
 			<key>Window Type</key>
 			<integer>8</integer>
 			<key>Working Directory</key>
-			<string>/Users/guy</string>
+			<string>~</string>
 		</dict>
 	</array>
 	<key>NoSyncAllAppVersions</key>
@@ -1693,7 +1693,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/guy/.macstrap/configs/iterm</string>
+	<string>~/.macstrap/configs/iterm</string>
 	<key>PromptOnQuitEvenIfThereAreNoWindows</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>

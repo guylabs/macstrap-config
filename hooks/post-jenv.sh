@@ -16,6 +16,12 @@ if hash jenv > /dev/null; then
   # Add Java 12
   jenv add "$(/usr/libexec/java_home -v 12)"
 
+  # Add Java 13
+  jenv add "$(/usr/libexec/java_home -v 13)"
+
+  # Add Java 14
+  jenv add "$(/usr/libexec/java_home -v 14)"
+
   # Enable export plugin for JAVA_HOME
   jenv sh-enable-plugin export
 

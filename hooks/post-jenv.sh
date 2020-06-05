@@ -13,12 +13,6 @@ if hash jenv > /dev/null; then
   # Add Java 11
   jenv add "$(/usr/libexec/java_home -v 11)"
 
-  # Add Java 12
-  jenv add "$(/usr/libexec/java_home -v 12)"
-
-  # Add Java 13
-  jenv add "$(/usr/libexec/java_home -v 13)"
-
   # Add Java 14
   jenv add "$(/usr/libexec/java_home -v 14)"
 

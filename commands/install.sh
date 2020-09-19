@@ -8,6 +8,17 @@ echo "# Installing your system ... #"
 echo "##############################"
 echo
 
+# Enable full disk access for the Terminal app to set all required settings
+sqlite3 /Library/Application\ Support/com.apple.TCC/TCC.db 'select * from access' > /dev/null 2>&1 && hasFullFileAccess=true || hasFullFileAccess=false
+
+if [ "$hasFullFileAccess" = "false" ]; then
+  printf "\033[1mPlease give the Terminal app full disk access by configuring it on the Security/Privacy tab.\033[0m\n"
+  printf "\033[1mThe security preferences will open after you press Enter. Please restart the Terminal app and execute the installation again.\033[0m\n"
+  read -r
+  open /System/Library/PreferencePanes/Security.prefPane
+  exit 0
+fi
+
 # installs the app or binary with the according hooks
 installAppOrBinary() {
   # execute the pre scripts

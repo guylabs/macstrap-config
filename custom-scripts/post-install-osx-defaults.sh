@@ -119,6 +119,26 @@ case $applyConfiguration in
         printf "\t- Disable system sound effects\n"
         defaults write NSGlobalDomain "com.apple.sound.uiaudio.enabled" -int 0
 
+        printf "\t- Change date format to 24h format\n"
+        defaults write com.apple.menuextra.clock DateFormat -string "d MMM HH:mm:ss"
+        defaults write -globalDomain AppleICUForce24HourTime -int 1
+
+        printf "\t- Show battery percentage in menu bar\n"
+        defaults write com.apple.menuextra.battery ShowPercent -bool true
+
+        printf "\t- Show Bluetooth icon in menu bar\n"
+        defaults write com.apple.systemuiserver menuExtras -array \
+            "/System/Library/CoreServices/Menu Extras/Clock.menu" \
+            "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+            "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+            "/System/Library/CoreServices/Menu Extras/VPN.menu" \
+            "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+            "/System/Library/CoreServices/Menu Extras/Displays.menu" \
+            "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
+
+        # Reload the menu bar to apply the changes
+        killall SystemUIServer
+
         ###############################################################################
         echo
         printf "\t SSD-specific tweaks\n"
@@ -152,6 +172,9 @@ case $applyConfiguration in
 
         printf "\t- Turn off keyboard illumination when computer is not used for 1 minute\n"
         defaults write com.apple.BezelServices kDimTime -int 60
+
+        printf "\t- Use F1, F2, etc. as standard function keys\n"
+        defaults write NSGlobalDomain "com.apple.keyboard.fnState" -int 1
 
         printf "\t- Enabling tap to click for this user and for the login screen\n"
         defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -488,12 +511,25 @@ case $applyConfiguration in
         defaults write com.apple.mail PlayMailSounds -int 0
         defaults write com.apple.mail NewMessagesSoundName -string ""
 
-        printf "\t- Disable inline attachments (just show the icons)\n"
-        defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
+        printf "\t- Add invitations to Calendar automatically\n"
+        defaults write com.apple.mail CalendarInviteRuleEnabled -int 1
 
-        printf "\t- Disable automatic spell checking\n"
-        defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
+        printf "\t- Automatically try sending later if outgoing server is unavailable\n"
+        defaults write com.apple.mail SuppressDeliveryFailure -int 1
 
+        ###############################################################################
+        echo
+        printf "\t Calendar\n"
+        printf "\t #################################\n"
+        echo
+        ###############################################################################
+
+        printf "\t- Show week numbers\n"
+        defaults write com.apple.mail  "Show Week Numbers" -int 1
+        
+        printf "\t- Set Monday as first day of week\n"
+        defaults write com.apple.mail  "first day of week -int 1
+       
         ###############################################################################
         echo
         printf "\t Spotlight\n"

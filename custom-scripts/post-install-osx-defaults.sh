@@ -516,7 +516,10 @@ case $applyConfiguration in
 
         printf "\t- Automatically try sending later if outgoing server is unavailable\n"
         defaults write com.apple.mail SuppressDeliveryFailure -int 1
-
+        
+        printf "\t- Check for new emails automatically\n"
+        defaults write com.apple.mail PollTime -int -1
+        
         ###############################################################################
         echo
         printf "\t Calendar\n"

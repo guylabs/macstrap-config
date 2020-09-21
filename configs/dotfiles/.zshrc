@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 bindkey '^R' history-incremental-search-backward
 
 # Enable colors
@@ -42,10 +41,6 @@ setopt HIST_FIND_NO_DUPS
 
 # Remove blank lines from history
 setopt HIST_REDUCE_BLANKS
-
-# Enable auto correction
-setopt CORRECT
-setopt CORRECT_ALL
 
 # Enable completion system
 autoload -Uz compinit && compinit

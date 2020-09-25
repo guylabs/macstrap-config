@@ -421,6 +421,9 @@ case $applyConfiguration in
         printf "\t- Set Safari’s home page to 'about:blank' for faster loading\n"
         defaults write com.apple.Safari HomePage -string "about:blank"
 
+        printf "\t- Show the status bar\n"
+        defaults write com.apple.Safari ShowOverlayStatusBar -bool true
+
         printf "\t- Prevent Safari from opening ‘safe’ files automatically after downloading\n"
         defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 

@@ -5,6 +5,9 @@ bindkey '^R' history-incremental-search-backward
 # Enable colors
 autoload -U colors && colors
 
+# Disable auto correction
+unsetopt correct_all
+
 # Turn off case sensitive globbing
 setopt NO_CASE_GLOB
 

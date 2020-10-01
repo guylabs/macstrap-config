@@ -1,10 +1,4 @@
 #!/bin/sh
 
-# Initialize jEnv
-eval "$(jenv init -)"
-
 # Update the number of open files
 ulimit -n 5000
-
-# Initialize NVM
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"

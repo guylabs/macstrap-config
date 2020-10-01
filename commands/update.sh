@@ -24,3 +24,8 @@ brew cask upgrade --greedy
 echo "Cleaning up homebrew ..."
 echo
 brew cleanup
+
+# update asdf
+echo "Updating ASDF plugins ..."
+echo
+asdf plugin update --all

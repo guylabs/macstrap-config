@@ -13,14 +13,8 @@ export LESS_TERMCAP_md="${yellow}";
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
 
-# Export jEnv root variable. See https://github.com/gcuisinier/jenv/wiki/Trouble-Shooting
-export JENV_ROOT=/usr/local/opt/jenv
-
-# Export NVM root directory
-export NVM_DIR="$HOME/.nvm"
-
 # Export JDK environment variable used for build
-export JDK14=$(/usr/libexec/java_home -v 14)
-export JDK11=$(/usr/libexec/java_home -v 11)
-export JDK8=$(/usr/libexec/java_home -v 1.8)
+export JDK15=$(asdf where java adoptopenjdk-15.0.0+36)
+export JDK11=$(asdf where java adoptopenjdk-11.0.8+10)
+export JDK8=$(asdf where java adoptopenjdk-8.0.265+1)
 export JDK6=$(/usr/libexec/java_home -v 1.6)

@@ -73,3 +73,6 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Fix https://github.com/petere/homebrew-postgresql/issues/49 by creating the folder before starting the cluster
 alias startpostgres="mkdir -p /usr/local/etc/postgresql/12/main/conf.d; pg_ctlcluster 12 main start"
+
+# Profile ZSH shell startup
+alias profilezsh="PROFILE=1 zsh -i -c exit;"

@@ -118,6 +118,8 @@ case $applyConfiguration in
 
         printf "\t- Disable system sound effects\n"
         defaults write NSGlobalDomain "com.apple.sound.uiaudio.enabled" -int 0
+        defaults write NSGlobalDomain "com.apple.sound.beep.volume" -int 0
+        defaults write NSGlobalDomain "com.apple.sound.beep.flash" -int 0
 
         printf "\t- Change date format to 24h format\n"
         defaults write com.apple.menuextra.clock DateFormat -string "d MMM HH:mm:ss"
@@ -173,8 +175,14 @@ case $applyConfiguration in
         printf "\t- Turn off keyboard illumination when computer is not used for 1 minute\n"
         defaults write com.apple.BezelServices kDimTime -int 60
 
-        printf "\t- Use F1, F2, etc. as standard function keys\n"
+        printf "\t- Use F1, F2, etc. as standard function keys on external keyboard\n"
         defaults write NSGlobalDomain "com.apple.keyboard.fnState" -int 1
+
+        printf "\t- Show F1, F2, etc. by default on touch bar\n"
+        defaults write com.apple.touchbar.agent PresentationModeGlobal -string "functionKeys"
+        defaults write com.apple.touchbar.agent PresentationModeFnModes -dict \
+            appWithControlStrip -string "fullControlStrip" \
+            functionKeys -string "fullControlStrip"
 
         printf "\t- Enabling tap to click for this user and for the login screen\n"
         defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -495,17 +503,29 @@ case $applyConfiguration in
         defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 
         printf "\t- Display emails in threaded mode, sorted by date (newest at the top)\n"
-        defaults write com.apple.mail InboxViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-        defaults write com.apple.mail InboxViewerAttributes -dict-add "SortedDescending" -string "no"
-        defaults write com.apple.mail InboxViewerAttributes -dict-add "SortOrder" -string "received-date"
+        defaults write com.apple.mail ArchiveViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+        defaults write com.apple.mail ArchiveViewerAttributes -dict-add "SortedDescending" -string "yes"
+        defaults write com.apple.mail ArchiveViewerAttributes -dict-add "SortOrder" -string "received-date"
 
         defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-        defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "no"
+        defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
         defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
 
-        defaults write com.apple.mail ArchiveViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-        defaults write com.apple.mail ArchiveViewerAttributes -dict-add "SortedDescending" -string "no"
-        defaults write com.apple.mail ArchiveViewerAttributes -dict-add "SortOrder" -string "received-date"
+        defaults write com.apple.mail InboxViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+        defaults write com.apple.mail InboxViewerAttributes -dict-add "SortedDescending" -string "yes"
+        defaults write com.apple.mail InboxViewerAttributes -dict-add "SortOrder" -string "received-date"
+
+        defaults write com.apple.mail JunkViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+        defaults write com.apple.mail JunkViewerAttributes -dict-add "SortedDescending" -string "yes"
+        defaults write com.apple.mail JunkViewerAttributes -dict-add "SortOrder" -string "received-date"
+
+        defaults write com.apple.mail SentMessagesViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+        defaults write com.apple.mail SentMessagesViewerAttributes -dict-add "SortedDescending" -string "yes"
+        defaults write com.apple.mail SentMessagesViewerAttributes -dict-add "SortOrder" -string "received-date"
+
+        defaults write com.apple.mail TrashViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+        defaults write com.apple.mail TrashViewerAttributes -dict-add "SortedDescending" -string "yes"
+        defaults write com.apple.mail TrashViewerAttributes -dict-add "SortOrder" -string "received-date"
 
         printf "\t- Display emails sorted by date (newest at the top) inside a thread\n"
         defaults write com.apple.mail ConversationViewSortDescending -int 1
@@ -522,6 +542,14 @@ case $applyConfiguration in
         
         printf "\t- Check for new emails automatically\n"
         defaults write com.apple.mail PollTime -int -1
+
+        printf "\t- Size panes and show mailboxes\n"
+        defaults write com.apple.mail "NSSplitView Subview Frames Main Window" -array \
+            "0.000000, 0.000000, 229.500000, 1177.000000, NO, NO" \
+            "230.500000, 0.000000, 1689.500000, 1177.000000, NO, NO"
+        defaults write com.apple.mail "NSSplitView Subview Frames Main Window Preview Pane Vertical" -array \
+            "0.000000, 0.000000, 400.000000, 1177.000000, NO, NO" \
+            "401.000000, 0.000000, 1288.500000, 1177.000000, NO, NO"
         
         ###############################################################################
         echo
@@ -531,10 +559,16 @@ case $applyConfiguration in
         ###############################################################################
 
         printf "\t- Show week numbers\n"
-        defaults write com.apple.mail  "Show Week Numbers" -int 1
+        defaults write com.apple.iCal "Show Week Numbers" -int 1
         
         printf "\t- Set Monday as first day of week\n"
-        defaults write com.apple.mail  "first day of week -int 1
+        defaults write com.apple.iCal "first day of week" -int 1
+
+        printf "\t- Show calendar sidebar\n"
+        defaults write com.apple.iCal CalendarSidebarShown -int 1
+
+        printf "\t- Show 4 months in mini calendar in sidebar\n"
+        defaults write com.apple.iCal CalendarListMiniMonthVisibleMonths -int 4
        
         ###############################################################################
         echo

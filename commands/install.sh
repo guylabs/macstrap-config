@@ -91,17 +91,6 @@ brew update
 # shellcheck source=macstrapConfigFile.sh
 . "$macstrapConfigFile"
 
-# Install apps
-if [ "${#apps[@]}" -gt 0 ]; then
-    echo "Installing apps ..."
-    for item in "${apps[@]}"
-    do
-      installAppOrBinary "$item" "cask"
-    done
-else
-    echo "No apps defined in macstrap configuration."
-fi
-
 # Install binaries
 if [ "${#binaries[@]}" -gt 0 ]; then
     echo "Installing binaries ..."
@@ -111,6 +100,17 @@ if [ "${#binaries[@]}" -gt 0 ]; then
     done
 else
     echo "No binaries defined in macstrap configuration."
+fi
+
+# Install apps
+if [ "${#apps[@]}" -gt 0 ]; then
+    echo "Installing apps ..."
+    for item in "${apps[@]}"
+    do
+      installAppOrBinary "$item" "cask"
+    done
+else
+    echo "No apps defined in macstrap configuration."
 fi
 
 # Remove outdated versions from the cellar

@@ -1,2 +1,104 @@
-[kubernetes]
-disabled = false
+add_newline = false
+
+[cmd_duration]
+min_time = 10
+show_milliseconds = true
+format = "[$duration](fg:242)"
+
+# Disable default modules as per https://starship.rs/config/#default-prompt-format to improve performance
+
+[hostname]
+disabled = true
+
+[git_status]
+disabled = true
+
+[package]
+disabled = true
+
+[cmake]
+disabled = true
+
+[dart]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[erlang]
+disabled = true
+
+[golang]
+disabled = true
+
+[helm]
+disabled = true
+
+[java]
+disabled = true
+
+[julia]
+disabled = true
+
+[nim]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[perl]
+disabled = true
+
+[php]
+disabled = true
+
+[purescript]
+disabled = true
+
+[python]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[swift]
+disabled = true
+
+[terraform]
+disabled = true
+
+[zig]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[conda]
+disabled = true
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[env_var]
+disabled = true
+
+[crystal]
+disabled = true
+
+[custom]
+disabled = true

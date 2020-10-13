@@ -73,7 +73,7 @@ else
 fi
 
 # Source macstrap files
-for file in ~/.macstrap/configs/dotfiles/.{aliases,exports,path,extra}; do
+for file in ~/.macstrap/configs/dotfiles/.{aliases,exports,extra,path}; do
 	[ -r "$file" ] && [ -f "$file" ] && . "$file";
 done;
 unset file;

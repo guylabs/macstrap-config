@@ -17,4 +17,4 @@ export MANPAGER='less -X';
 export JDK15=$(asdf where java adoptopenjdk-15.0.0+36)
 export JDK11=$(asdf where java adoptopenjdk-11.0.8+10)
 export JDK8=$(asdf where java adoptopenjdk-8.0.265+1)
-export JDK6=$(/usr/libexec/java_home -v 1.6)
+export JDK6=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home

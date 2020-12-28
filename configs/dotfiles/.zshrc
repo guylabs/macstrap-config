@@ -2,7 +2,8 @@
 
 if [ ! -z $PROFILE ]; then
 	echo "Profiling ZSH shell startup enabled"
-    zmodload zsh/zprof
+  zmodload zsh/zprof
+  set -x
 fi
 
 bindkey '^R' history-incremental-search-backward
@@ -86,8 +87,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Add ASDF to ZSH
 . $(brew --prefix asdf)/asdf.sh
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 if [ ! -z $PROFILE ]; then
 	echo "ZSH Profile results:\n\n"
-    zprof
+  zprof
 fi

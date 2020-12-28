@@ -18,7 +18,7 @@ echo "Updating the apps and binaries ..."
 echo
 brew update
 brew upgrade
-brew cask upgrade --greedy
+brew upgrade --cask --greedy
 
 # cleanup
 echo "Cleaning up homebrew ..."

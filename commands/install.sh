@@ -35,7 +35,7 @@ installAppOrBinary() {
 
   # install the app or binary
   if [ "$2" = "cask" ]; then
-      brew cask install "$1"
+      brew install --cask "$1"
   else
       brew install "$1"
   fi

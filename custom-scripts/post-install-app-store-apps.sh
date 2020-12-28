@@ -1,9 +1,6 @@
 #!/bin/sh
 set -e
 
-# Lastpass app
-open https://apps.apple.com/us/app/lastpass/id926036361
-
 # Affinity app
 open https://apps.apple.com/us/app/lastpass/id824183456
 

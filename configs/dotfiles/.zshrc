@@ -40,7 +40,7 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 
 # Expire hoistory duplicates first
-setopt HIST_EXPIRE_DUPS_FIRST 
+setopt HIST_EXPIRE_DUPS_FIRST
 
 # Do not store duplicates
 setopt HIST_IGNORE_DUPS
@@ -51,7 +51,7 @@ setopt HIST_FIND_NO_DUPS
 # Remove blank lines from history
 setopt HIST_REDUCE_BLANKS
 
-# Enable case insensitive path-completion 
+# Enable case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
 # Enable partial completion suggestions
@@ -87,6 +87,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Add ASDF to ZSH
 . $(brew --prefix asdf)/asdf.sh
+
+# Set JAVA_HOME
 . ~/.asdf/plugins/java/set-java-home.zsh
 
 if [ ! -z $PROFILE ]; then

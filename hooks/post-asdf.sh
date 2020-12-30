@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# Ensure GPG is installed as the NodeJS installation requires it
+brew install gpg
+
 # Install ASDF Java plugin
 asdf plugin add java || true
 

@@ -10,7 +10,7 @@ fi
 brew tap petere/postgresql
 
 # Fix https://github.com/petere/homebrew-postgresql/issues/44 by removing the --with-perl option
-sed -i "" "/--with-perl/d" /usr/local/Homebrew/Library/Taps/petere/homebrew-postgresql/postgresql@12.rb
+sed -i "" "/--with-perl/d" $(brew --repo)/Library/Taps/petere/homebrew-postgresql/postgresql@12.rb
 
 # Install the latest PostgreSQL 12.x
 brew install petere/postgresql/postgresql-common petere/postgresql/postgresql@12

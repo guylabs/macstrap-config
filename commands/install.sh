@@ -19,6 +19,11 @@ if [ -z "$CI" ]; then
     open /System/Library/PreferencePanes/Security.prefPane
     exit 0
   fi
+
+  # Check if we need to install Rosetta 2 on Apple M1 macbooks
+  if [ "$(uname -m)" = "arm64" ]; then
+      softwareupdate --install-rosetta --agree-to-license
+  fi
 fi
 
 # installs the app or binary with the according hooks

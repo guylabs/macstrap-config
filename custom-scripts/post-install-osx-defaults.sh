@@ -18,7 +18,7 @@ printf "Enter your decision: "
 echo
 
 # The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
-if [ -z "$CI" ]; then
+if [ -z "${CI-}" ]; then
   read -r applyConfiguration
 else
   applyConfiguration="1"
@@ -35,7 +35,7 @@ case $applyConfiguration in
         sudo true
 
         # The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
-        if [ -z "$CI" ]; then
+        if [ -z "${CI-}" ]; then
             # Set computer name (as done via System Preferences → Sharing)
             printf "Enter the hostname: "
 
@@ -629,7 +629,7 @@ case $applyConfiguration in
         defaults write com.apple.terminal StringEncodings -array 4
 
         # Only apply a custom terminal theme if not in CI, as on CI the command times out.
-        if [ -z "$CI" ]; then
+        if [ -z "${CI-}" ]; then
 
             printf "\t- Use a modified version of the Afterglow theme by default in Terminal.app\n"
             osascript -e '

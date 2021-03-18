@@ -2,7 +2,7 @@
 set -e
 
 # Unlink the already installed postgresql on CI.
-if [ -n "$CI" ]; then
+if [ -z "${CI-}" ]; then
   brew uninstall --ignore-dependencies postgresql
 fi
 

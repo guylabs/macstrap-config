@@ -9,7 +9,7 @@ echo "##############################"
 echo
 
 # Enable full disk access for the Terminal app to set all required settings. Only do this if not on CI
-if [ -z "$CI" ]; then
+if [ -z "${CI-}" ]; then
   sqlite3 /Library/Application\ Support/com.apple.TCC/TCC.db 'select * from access' > /dev/null 2>&1 && hasFullFileAccess=true || hasFullFileAccess=false
 
   if [ "$hasFullFileAccess" = "false" ]; then

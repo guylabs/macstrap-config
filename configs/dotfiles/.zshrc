@@ -17,6 +17,9 @@ unsetopt correct_all
 # Turn off case sensitive globbing
 setopt NO_CASE_GLOB
 
+# Turn off no match globbing errors
+unsetopt NOMATCH
+
 # Change directory without explicit `cd` command
 setopt AUTO_CD
 

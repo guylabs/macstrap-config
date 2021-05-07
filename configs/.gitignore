@@ -1,0 +1,3 @@
+# Only include the selected configuration files as we symlink
+# the folder and it may contain sensitive data.
+alfred

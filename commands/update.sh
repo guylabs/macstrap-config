@@ -17,12 +17,12 @@ softwareupdate -ia
 echo "Updating the apps and binaries ..."
 echo
 brew update
-brew upgrade
-brew upgrade --cask --greedy
+brew upgrade --greedy
 
 # cleanup
 echo "Cleaning up homebrew ..."
 echo
+brew autoremove
 brew cleanup
 
 # update asdf

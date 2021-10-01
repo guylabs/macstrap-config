@@ -14,15 +14,10 @@ printf "\033[1mPlease select if you want to apply the custom Mac OSX configurati
 echo "[1] Apply the configuration"
 echo "[2] Skip applying the configuration"
 echo
-printf "Enter your decision: "
-echo
 
-# The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
-if [ -z "${CI-}" ]; then
-  read -r applyConfiguration
-else
-  applyConfiguration="1"
-fi
+printf "Enter your decision: "
+applyConfiguration=$(readInput "1")
+echo
 
 case $applyConfiguration in
     "1")
@@ -34,19 +29,15 @@ case $applyConfiguration in
         echo "We need sudo right to set some Mac OS X defaults."
         sudo true
 
-        # The installation of OSX defaults can be forced. This is used in CI environments where there is no possibility to read the input.
-        if [ -z "${CI-}" ]; then
-            # Set computer name (as done via System Preferences → Sharing)
-            printf "Enter the hostname: "
+        # Set computer name (as done via System Preferences → Sharing)
+        printf "Enter the hostname: "
 
-            # read the hostname
-            read -r hostname
-
-            sudo scutil --set ComputerName "$hostname"
-            sudo scutil --set HostName "$hostname"
-            sudo scutil --set LocalHostName "$hostname"
-            sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$hostname"
-        fi
+        # read the hostname
+        hostname=$(readInput "default-host-name")
+        sudo scutil --set ComputerName "$hostname"
+        sudo scutil --set HostName "$hostname"
+        sudo scutil --set LocalHostName "$hostname"
+        sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$hostname"
 
         ###############################################################################
         echo
@@ -539,7 +530,7 @@ case $applyConfiguration in
 
         printf "\t- Automatically try sending later if outgoing server is unavailable\n"
         defaults write com.apple.mail SuppressDeliveryFailure -int 1
-        
+
         printf "\t- Check for new emails automatically\n"
         defaults write com.apple.mail PollTime -int -1
 
@@ -550,7 +541,7 @@ case $applyConfiguration in
         defaults write com.apple.mail "NSSplitView Subview Frames Main Window Preview Pane Vertical" -array \
             "0.000000, 0.000000, 400.000000, 1177.000000, NO, NO" \
             "401.000000, 0.000000, 1288.500000, 1177.000000, NO, NO"
-        
+
         ###############################################################################
         echo
         printf "\t Calendar\n"
@@ -560,7 +551,7 @@ case $applyConfiguration in
 
         printf "\t- Show week numbers\n"
         defaults write com.apple.iCal "Show Week Numbers" -int 1
-        
+
         printf "\t- Set Monday as first day of week\n"
         defaults write com.apple.iCal "first day of week" -int 1
 
@@ -569,54 +560,6 @@ case $applyConfiguration in
 
         printf "\t- Show 4 months in mini calendar in sidebar\n"
         defaults write com.apple.iCal CalendarListMiniMonthVisibleMonths -int 4
-       
-        ###############################################################################
-        echo
-        printf "\t Spotlight\n"
-        printf "\t #################################\n"
-        echo
-        ###############################################################################
-
-        printf "\t- Change indexing order and disable some search results\n"
-        # Yosemite-specific search results (remove them if you are using macOS 10.9 or older):
-        # 	MENU_DEFINITION
-        # 	MENU_CONVERSION
-        # 	MENU_EXPRESSION
-        # 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
-        # 	MENU_WEBSEARCH             (send search queries to Apple)
-        # 	MENU_OTHER
-        defaults write com.apple.spotlight orderedItems -array \
-        	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
-        	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-        	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
-        	'{"enabled" = 1;"name" = "PDF";}' \
-        	'{"enabled" = 1;"name" = "FONTS";}' \
-        	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
-        	'{"enabled" = 0;"name" = "MESSAGES";}' \
-        	'{"enabled" = 0;"name" = "CONTACT";}' \
-        	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
-        	'{"enabled" = 0;"name" = "IMAGES";}' \
-        	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
-        	'{"enabled" = 0;"name" = "MUSIC";}' \
-        	'{"enabled" = 0;"name" = "MOVIES";}' \
-        	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-        	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-        	'{"enabled" = 0;"name" = "SOURCE";}' \
-        	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
-        	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
-        	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
-        	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
-        	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
-        	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
-
-        printf "\t- Load new settings before rebuilding the index\n"
-        sudo killall mds > /dev/null 2>&1
-
-        printf "\t- Make sure indexing is enabled for the main volume\n"
-        sudo mdutil -i on / > /dev/null
-
-        printf "\t- Rebuild the index from scratch\n"
-        sudo mdutil -E / > /dev/null
 
         ###############################################################################
         echo

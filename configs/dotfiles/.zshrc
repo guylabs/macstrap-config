@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if [ ! -z $PROFILE ]; then
-	echo "Profiling ZSH shell startup enabled"
+if [ -n "$PROFILE" ]; then
+  echo "Profiling ZSH shell startup enabled"
   zmodload zsh/zprof
   set -x
 fi
@@ -97,7 +97,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Set JAVA_HOME
 . ~/.asdf/plugins/java/set-java-home.zsh
 
-if [ ! -z $PROFILE ]; then
-	echo "ZSH Profile results:\n\n"
+if [ -n "$PROFILE" ]; then
+  echo "ZSH Profile results:\n\n"
   zprof
 fi

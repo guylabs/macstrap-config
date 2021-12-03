@@ -1,7 +1,7 @@
 add_newline = false
 
 [cmd_duration]
-min_time = 10
+min_time = 1
 show_milliseconds = true
 format = "[$duration](fg:242)"
 
@@ -44,6 +44,9 @@ disabled = true
 disabled = true
 
 [julia]
+disabled = true
+
+[kotlin]
 disabled = true
 
 [nim]

@@ -20,10 +20,13 @@ asdf global java temurin-11.0.12+7 || true
 # Install Java 16
 asdf install java temurin-16.0.2+7 || true
 
+# Install Java 17
+asdf install java temurin-17.0.0+35 || true
+
 # Install ASDF NodeJS plugin
 asdf plugin add nodejs || true
 ${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring
 
-# Install NodeJS 16.3.0 and set it globally as default
-asdf install nodejs 16.3.0 || true
-asdf global nodejs 16.3.0 || true
+# Install NodeJS 17.0.1 and set it globally as default
+asdf install nodejs 17.0.1 || true
+asdf global nodejs 17.0.1 || true

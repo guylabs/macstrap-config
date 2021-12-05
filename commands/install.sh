@@ -3,8 +3,7 @@ set -e
 
 # Evaluate brew when the terminal is restarted
 if test ! "$(hash brew)"; then
-  # If M1 Mac
-  if [[ `uname -m` == 'arm64' ]]; then
+  if isArmArchitecture; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
   else
     eval "$(brew --prefix)/bin/brew shellenv"

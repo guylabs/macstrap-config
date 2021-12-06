@@ -1,6 +1,19 @@
 #!/bin/sh
 set -e
 
+
+printf "\033[1mPlease select if you want to setup Git commit signing with Github\033[0m:\n"
+echo "[1] Yes (for new installs)"
+echo "[2] No (in case you already have it configured or port it from a backup)"
+echo
+
+printf "Enter your decision: "
+applyConfiguration=$(readInput "1")
+echo
+
+case $applyConfiguration in
+    "1")
+
 echo "The next steps configure GIT and commit sigining. Please provide the necessary information when prompted."
 echo
 printf "Full name (e.g. Jaohne Doe): "
@@ -44,4 +57,4 @@ echo "Follow this guide to add it to Github:"
 echo "  https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-new-gpg-key-to-your-github-account"
 echo
 echo "Once done, press Enter to continue."
-readInput
+readInput 0

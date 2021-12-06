@@ -14,7 +14,6 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Export JDK environment variable used for build
-export JDK7=$(asdf where java zulu-7.48.0.11)
 export JDK8=$(asdf where java temurin-8.0.302+8)
 export JDK11=$(asdf where java temurin-11.0.12+7)
 export JDK16=$(asdf where java temurin-16.0.2+7)

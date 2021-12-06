@@ -31,42 +31,60 @@ if [ -z "${CI-}" ]; then
     exit 0
   fi
 
-  # Check if we need to install Rosetta 2 on Apple M1 macbooks
-  if [ "$(uname -m)" = "arm64" ]; then
+  # Check if we need to install Rosetta 2 on ARM architecture
+  if isArmArchitecture; then
       softwareupdate --install-rosetta --agree-to-license
   fi
 fi
 
 # installs the app or binary with the according hooks
 installAppOrBinary() {
-  # execute the pre scripts
-  preScript="$macstrapConfigFolder/hooks/pre-$1.sh"
-  if [ -e "$preScript" ]; then
-    echo
-    printf "Executing \033[1m%s\033[0m ...\n" "$preScript"
-    echo
-    # shellcheck source=preScript.sh
-    . "$preScript"
-  fi
+  if isFormulaInstalled "$1" "$2"; then
+    # execute the pre scripts
+    preScript="$macstrapConfigFolder/hooks/pre-$1.sh"
+    if [ -e "$preScript" ]; then
+      echo
+      printf "Executing \033[1m%s\033[0m ...\n" "$preScript"
+      echo
+      # shellcheck source=preScript.sh
+      . "$preScript"
+    fi
 
-  # install the app or binary
+    # install the app or binary
+    if [ "$2" = "cask" ]; then
+      brew install -f --cask "$1"
+    else
+      brew install -f "$1" \
+        || brew upgrade "$1" \
+        || (printf "\n\e[1;31m%s could neither be installed nor upgraded by brew.\e[m\n\n" "$1"; exit 1)
+    fi
+
+    # execute the post scripts
+    postScript="$macstrapConfigFolder/hooks/post-$1.sh"
+    if [ -e "$postScript" ]; then
+      echo
+      printf "Executing \033[1m%s\033[0m ...\n" "$postScript"
+      echo
+      # shellcheck source=postScript.sh
+      . "$postScript"
+    fi
+  fi
+}
+
+# check if formula is already installed
+isFormulaInstalled() {
   if [ "$2" = "cask" ]; then
-    brew install -f --cask "$1"
+    if brew ls --cask --full-name "$1"; then
+      printf "- Cask formula %s already installed." "$1"
+      return 0
+    fi
   else
-    brew install -f "$1" \
-      || brew upgrade "$1" \
-      || (printf "\n\e[1;31m%s could neither be installed nor upgraded by brew.\e[m\n\n" "$1"; exit 1)
+    if brew ls --full-name "$1"; then
+    printf "- Formula %s already installed." "$1"
+      return 0
+    fi
   fi
-
-  # execute the post scripts
-  postScript="$macstrapConfigFolder/hooks/post-$1.sh"
-  if [ -e "$postScript" ]; then
-    echo
-    printf "Executing \033[1m%s\033[0m ...\n" "$postScript"
-    echo
-    # shellcheck source=postScript.sh
-    . "$postScript"
-  fi
+  return 1
 }
 
 # rename symlink

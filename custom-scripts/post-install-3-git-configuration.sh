@@ -57,4 +57,4 @@ echo "Follow this guide to add it to Github:"
 echo "  https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-new-gpg-key-to-your-github-account"
 echo
 echo "Once done, press Enter to continue."
-readInput 0
+readInput "0"

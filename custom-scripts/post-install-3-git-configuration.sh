@@ -30,15 +30,15 @@ case $applyConfiguration in
         echo
 
         gpg --full-generate-key --expert << EOF
-            Key-Type: EDDSA
-              Key-Curve: ed25519
-            Subkey-Type: ECDH
-              Subkey-Curve: cv25519
-            Name-Real: $fullName
-            Name-Email: $email
-            Expire-Date: 0
-            %commit
-        EOF
+    Key-Type: EDDSA
+      Key-Curve: ed25519
+    Subkey-Type: ECDH
+      Subkey-Curve: cv25519
+    Name-Real: $fullName
+    Name-Email: $email
+    Expire-Date: 0
+    %commit
+EOF
 
         echo
         echo "Successfully created GPG key. Configuring GIT to use it for commit signing."

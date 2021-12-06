@@ -39,7 +39,7 @@ fi
 
 # installs the app or binary with the according hooks
 installAppOrBinary() {
-  if isFormulaInstalled "$1" "$2"; then
+  if ! isFormulaInstalled "$1" "$2"; then
     # execute the pre scripts
     preScript="$macstrapConfigFolder/hooks/pre-$1.sh"
     if [ -e "$preScript" ]; then

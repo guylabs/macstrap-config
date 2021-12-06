@@ -62,7 +62,7 @@ zstyle ':completion:*' list-suffixes
 zstyle ':completion:*' expand prefix suffix
 
 # Export brew environment variables
-eval "$(brew --prefix)/bin/brew shellenv"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Load Homebrew completions
 if type brew &>/dev/null; then

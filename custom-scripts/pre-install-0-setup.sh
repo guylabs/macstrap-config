@@ -30,11 +30,6 @@ if [ -z "${CI-}" ]; then
     open /System/Library/PreferencePanes/Security.prefPane
     exit 0
   fi
-
-  # Check if we need to install Rosetta 2 on ARM architecture
-  if isArmArchitecture; then
-      softwareupdate --install-rosetta --agree-to-license
-  fi
 fi
 
 # installs the app or binary with the according hooks

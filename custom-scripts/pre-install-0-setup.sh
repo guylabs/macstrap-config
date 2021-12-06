@@ -75,12 +75,12 @@ installAppOrBinary() {
 isFormulaInstalled() {
   if [ "$2" = "cask" ]; then
     if brew ls --cask --full-name "$1"; then
-      printf "- Cask formula %s already installed." "$1"
+      printf "\033[1mCask formula %s already installed.\033[0m\n\n" "$1"
       return 0
     fi
   else
     if brew ls --full-name "$1"; then
-    printf "- Formula %s already installed." "$1"
+      printf "\033[1mFormula %s already installed.\033[0m\n\n" "$1"
       return 0
     fi
   fi

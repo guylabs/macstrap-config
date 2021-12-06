@@ -191,9 +191,6 @@ case $applyConfiguration in
         defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
         defaults write NSGlobalDomain AppleMetricUnits -bool true
 
-        printf "\t- Set the timezone; see 'sudo systemsetup -listtimezones' for other values\n"
-        sudo systemsetup -settimezone "Europe/Zurich" > /dev/null
-
         ###############################################################################
         echo
         printf "\t Screen\n"

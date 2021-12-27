@@ -2,4 +2,4 @@
 set -e
 
 # Affinity app
-open https://apps.apple.com/us/app/lastpass/id824183456
+open https://apps.apple.com/ch/app/affinity-photo/id824183456

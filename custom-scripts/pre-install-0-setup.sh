@@ -34,7 +34,7 @@ fi
 
 # installs the app or binary with the according hooks
 installAppOrBinary() {
-  if ! isFormulaInstalled "$1" "$2"; then
+  if ! isFormulaInstalled "$1"; then
     # execute the pre scripts
     preScript="$macstrapConfigFolder/hooks/pre-$1.sh"
     if [ -e "$preScript" ]; then
@@ -68,18 +68,9 @@ installAppOrBinary() {
 
 # check if formula is already installed
 isFormulaInstalled() {
-  if [ "$2" = "cask" ]; then
-    if brew ls --cask --full-name "$1"; then
-      printf "\033[1mCask formula %s already installed.\033[0m\n\n" "$1"
-      return 0
-    fi
-  else
-    if brew ls --full-name "$1"; then
-      printf "\033[1mFormula %s already installed.\033[0m\n\n" "$1"
-      return 0
-    fi
-  fi
-  return 1
+  # We need to capture the output as there are issues with piping `brew list`
+  installedFormulas=$(brew list)
+  echo $installedFormulas | grep -q "$1"
 }
 
 # rename symlink

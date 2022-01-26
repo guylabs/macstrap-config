@@ -180,16 +180,59 @@ case $applyConfiguration in
         defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
         defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-        printf "\t- Enable 'natural' (Lion-style) scrolling\n"
-        defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+        printf "\t\033[1mPlease select your desired scroll direction\033[0m:\n"
+        echo "\t\t[1] Enable 'natural' (Lion-style) scrolling"
+        echo "\t\t[2] Leave default MacOS behavior"
+        echo
 
-        printf "\t- Set language and text formats\n"
+        printf "\t\tEnter your decision: "
+        scrolldirection=$(readInput "1")
+        echo
+
+        case $scrolldirection in
+            "1")
+                printf "\t- Enable 'natural' (Lion-style) scrolling\n"
+                defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+                ;;
+            *)
+                printf "\t- Leaving default MacOS behavior\n"
+                ;;
+        esac
+
+        printf "\t\033[1mPlease select your local for locale, languages and measurements\033[0m:\n"
+        echo "\t\t[1] US English, Inches"
+        echo "\t\t[2] EU English, Metric"
+        echo "\t\t[3] No changes"
+        echo
+
+
         # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
         # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
-        defaults write NSGlobalDomain AppleLanguages -array "en" "de"
-        defaults write NSGlobalDomain AppleLocale -string "en_US@currency=CHF"
-        defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-        defaults write NSGlobalDomain AppleMetricUnits -bool true
+        printf "\t\tEnter your decision: "
+        localeinput=$(readInput "1")
+        echo
+
+        case $localeinput in
+            "1")
+                printf "\t- Set language and text formats to EU\n"
+                
+                defaults write NSGlobalDomain AppleLanguages -array "en" "de"
+                defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
+                defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
+                defaults write NSGlobalDomain AppleMetricUnits -bool false
+                ;;
+            "2")
+                printf "\t- Set language and text formats to EU\n"
+                
+                defaults write NSGlobalDomain AppleLanguages -array "en" "de"
+                defaults write NSGlobalDomain AppleLocale -string "en_US@currency=CHF"
+                defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+                defaults write NSGlobalDomain AppleMetricUnits -bool true
+                ;;
+            *)
+                printf "\t- No changes to locale\n"
+                ;;
+        esac
 
         ###############################################################################
         echo
@@ -714,11 +757,27 @@ case $applyConfiguration in
         printf "\t #################################\n"
         echo
 
-        printf "\t- Disable the all too sensitive backswipe on trackpads\n"
-        defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+        printf "\t\033[1mDisable backswipe on trackpads & magic mouse\033[0m:\n"
+        echo "\t\t[1] Disable backswipe on trackpads & magic mouse"
+        echo "\t\t[2] Keep default backswipe behavior"
+        echo
 
-        printf "\t- Disable the all too sensitive backswipe on Magic Mouse\n"
-        defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+        printf "\t\tEnter your decision: "
+        backswipedisable=$(readInput "1")
+        echo
+
+        case $backswipedisable in
+            "1")
+                printf "\t- Disable the all too sensitive backswipe on trackpads\n"
+                defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+
+                printf "\t- Disable the all too sensitive backswipe on Magic Mouse\n"
+                defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+                ;;
+            *)
+                printf "\t- Leaving default backswipe behavior\n"
+                ;;
+        esac
 
         printf "\t- Use the system-native print preview dialog\n"
         defaults write com.google.Chrome DisablePrintPreview -bool true

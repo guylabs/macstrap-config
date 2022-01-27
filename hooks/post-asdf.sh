@@ -22,7 +22,6 @@ asdf install java liberica-17.0.1+12 || true
 
 # Install ASDF NodeJS plugin
 asdf plugin add nodejs || true
-${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring
 
 # Install NodeJS 17.0.1 and set it globally as default
 asdf install nodejs 17.0.1 || true

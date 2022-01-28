@@ -181,10 +181,9 @@ case $applyConfiguration in
         defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
         printf "\t\033[1mPlease select your desired scroll direction\033[0m:\n"
-        echo "\t\t[1] Enable 'natural' (Lion-style) scrolling"
-        echo "\t\t[2] Leave default MacOS behavior"
+        printf "\t\t[1] Enable 'natural' (Lion-style) scrolling\n"
+        printf "\t\t[2] Leave default MacOS behavior\n"
         echo
-
         printf "\t\tEnter your decision: "
         scrolldirection=$(readInput "1")
         echo
@@ -200,21 +199,17 @@ case $applyConfiguration in
         esac
 
         printf "\t\033[1mPlease select your local for locale, languages and measurements\033[0m:\n"
-        echo "\t\t[1] US English, Inches"
-        echo "\t\t[2] EU English, Metric"
-        echo "\t\t[3] No changes"
+        printf "\t\t[1] US English, Inches\n"
+        printf "\t\t[2] EU English, Metric\n"
+        printf "\t\t[3] No changes\n"
         echo
-
-
-        # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
-        # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
         printf "\t\tEnter your decision: "
         localeinput=$(readInput "1")
         echo
 
         case $localeinput in
             "1")
-                printf "\t- Set language and text formats to EU\n"
+                printf "\t- Set language and text formats to US\n"
                 
                 defaults write NSGlobalDomain AppleLanguages -array "en" "de"
                 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
@@ -225,7 +220,7 @@ case $applyConfiguration in
                 printf "\t- Set language and text formats to EU\n"
                 
                 defaults write NSGlobalDomain AppleLanguages -array "en" "de"
-                defaults write NSGlobalDomain AppleLocale -string "en_US@currency=CHF"
+                defaults write NSGlobalDomain AppleLocale -string "en_US@currency=EUR"
                 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
                 defaults write NSGlobalDomain AppleMetricUnits -bool true
                 ;;
@@ -750,41 +745,6 @@ case $applyConfiguration in
 
         # Disable continuous spell checking
         defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
-
-        ###############################################################################
-        echo
-        printf "\t Google Chrome\n"
-        printf "\t #################################\n"
-        echo
-
-        printf "\t\033[1mDisable backswipe on trackpads & magic mouse\033[0m:\n"
-        echo "\t\t[1] Disable backswipe on trackpads & magic mouse"
-        echo "\t\t[2] Keep default backswipe behavior"
-        echo
-
-        printf "\t\tEnter your decision: "
-        backswipedisable=$(readInput "1")
-        echo
-
-        case $backswipedisable in
-            "1")
-                printf "\t- Disable the all too sensitive backswipe on trackpads\n"
-                defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-
-                printf "\t- Disable the all too sensitive backswipe on Magic Mouse\n"
-                defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
-                ;;
-            *)
-                printf "\t- Leaving default backswipe behavior\n"
-                ;;
-        esac
-
-        printf "\t- Use the system-native print preview dialog\n"
-        defaults write com.google.Chrome DisablePrintPreview -bool true
-
-        printf "\t- Expand the print dialog by default\n"
-        defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
-
 
         ###############################################################################
         echo

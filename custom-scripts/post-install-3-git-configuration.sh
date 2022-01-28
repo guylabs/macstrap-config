@@ -20,8 +20,8 @@ case $applyConfiguration in
 
         git config --global user.name "$fullName"
 
-        printf "Gradle email (e.g. jdoe@gradle.com): "
-        email=$(readInput "jdoe@gradle.com")
+        printf "Git email (e.g. jdoe@employer.example.com): "
+        email=$(readInput "jdoe@employer.example.com")
 
         git config --global user.email "$email"
 

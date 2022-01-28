@@ -3,6 +3,5 @@
         "buildkit": true
     },
     "registry-mirrors": [
-        "https://docker.repo.grdev.net"
     ]
 }

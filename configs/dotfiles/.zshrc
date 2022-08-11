@@ -85,14 +85,8 @@ for file in ~/.macstrap/configs/dotfiles/.{aliases,exports,extra,path}; do
 done;
 unset file;
 
-# Start Starship
-eval "$(starship init zsh)"
-
-# Add iTerm2 shell integrations
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 # Add ASDF to ZSH
-. $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 # Set JAVA_HOME
 . ~/.asdf/plugins/java/set-java-home.zsh

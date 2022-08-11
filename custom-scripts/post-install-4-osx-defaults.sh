@@ -30,7 +30,7 @@ case $applyConfiguration in
         sudo true
 
         # Set computer name (as done via System Preferences → Sharing)
-        printf "Enter the hostname: "
+        printf "Enter the hostname (without any spaces): "
 
         # read the hostname
         hostname=$(readInput "default-host-name")
@@ -210,7 +210,7 @@ case $applyConfiguration in
         case $localeinput in
             "1")
                 printf "\t- Set language and text formats to US\n"
-                
+
                 defaults write NSGlobalDomain AppleLanguages -array "en" "de"
                 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
                 defaults write NSGlobalDomain AppleMeasurementUnits -string "Inches"
@@ -218,7 +218,7 @@ case $applyConfiguration in
                 ;;
             "2")
                 printf "\t- Set language and text formats to EU\n"
-                
+
                 defaults write NSGlobalDomain AppleLanguages -array "en" "de"
                 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=EUR"
                 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"

@@ -1,0 +1,22 @@
+environment {
+    terminal "Warp"
+    textEditor "Visual Studio Code"
+}
+
+behavior {
+    theme "Kon"
+    relativeDate false
+    dateFormat {
+        normal "%Y-%m-%d"
+    }
+    timeFormat {
+        separator "T"
+        normal "%H:%M:%S"
+    }
+    table {
+        defaults {
+            columns ">size:80,modified:150"
+            showHiddenFiles true
+        }
+    }
+}

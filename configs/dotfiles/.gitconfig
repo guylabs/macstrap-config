@@ -150,6 +150,9 @@
 
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
+[init]
+	# Set the default branch name to 'main'
+	defaultBranch = main
 
 [merge]
 

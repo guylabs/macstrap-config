@@ -107,14 +107,42 @@ case $applyConfiguration in
         defaults write NSGlobalDomain AppleHighlightColor -string "0.847059 0.847059 0.862745"
         defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
 
-        printf "\t- Disable system sound effects\n"
-        defaults write NSGlobalDomain "com.apple.sound.uiaudio.enabled" -int 0
-        defaults write NSGlobalDomain "com.apple.sound.beep.volume" -int 0
-        defaults write NSGlobalDomain "com.apple.sound.beep.flash" -int 0
+        printf "\t\033[1mPlease select if you'd like to disable system sounds\033[0m:\n"
+        printf "\t\t[1] Disable System Sounds\n"
+        printf "\t\t[2] Leave default MacOS behavior\n"
+        echo
+        printf "\t\tEnter your decision: "
+        systemsoundselection=$(readInput "1")
+        case $systemsoundselection in
+            "1")
+                printf "\t- Disable system sound effects\n"
+                defaults write NSGlobalDomain "com.apple.sound.uiaudio.enabled" -int 0
+                defaults write NSGlobalDomain "com.apple.sound.beep.volume" -int 0
+                defaults write NSGlobalDomain "com.apple.sound.beep.flash" -int 0
+                ;;
+            *)
+                printf "\t- Leaving default MacOS behavior\n"
+                ;;
+        esac
 
-        printf "\t- Change date format to 24h format\n"
-        defaults write com.apple.menuextra.clock DateFormat -string "d MMM HH:mm:ss"
-        defaults write -globalDomain AppleICUForce24HourTime -int 1
+        printf "\t\033[1mPlease select your desired system clock time direction\033[0m:\n"
+        printf "\t\t[1] Set system clock to to 24 hour clock\n"
+        printf "\t\t[2] Leave default MacOS behavior\n"
+        echo
+        printf "\t\tEnter your decision: "
+        timeselection=$(readInput "1")
+        echo
+
+        case $timeselection in
+            "1")
+                printf "\t- Change date format to 24h format\n"
+                defaults write com.apple.menuextra.clock DateFormat -string "d MMM HH:mm:ss"
+                defaults write -globalDomain AppleICUForce24HourTime -int 1
+                ;;
+            *)
+                printf "\t- Leaving default MacOS behavior\n"
+                ;;
+        esac
 
         printf "\t- Show battery percentage in menu bar\n"
         defaults write com.apple.menuextra.battery ShowPercent -bool true

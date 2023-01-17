@@ -85,6 +85,11 @@ for file in ~/.macstrap/configs/dotfiles/.{aliases,exports,extra,path}; do
 done;
 unset file;
 
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+    # Start Starship for non-WarpTerminal terminals (e.g. IntelliJ, VSCode, ect...)
+    eval "$(starship init zsh)"
+fi
+
 # Add ASDF to ZSH
 . $(brew --prefix asdf)/libexec/asdf.sh
 

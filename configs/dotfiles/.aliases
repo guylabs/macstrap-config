@@ -73,3 +73,14 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Profile ZSH shell startup
 alias profilezsh="PROFILE=1 zsh -i -c exit;"
+
+alias _git=`which git`
+
+git() {
+  if [ "$1" = "commit" ]; then # Sign all commits
+    shift
+    _git commit -s $@
+  else
+    _git $@
+  fi
+}

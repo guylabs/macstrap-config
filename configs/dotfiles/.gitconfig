@@ -146,6 +146,10 @@
 	# Use `hexdump` to diff binary files
 	textconv = hexdump -v -C
 
+[format]
+	# Automatically --signoff commits
+	signOff = true
+
 [help]
 
 	# Automatically correct and execute mistyped commands

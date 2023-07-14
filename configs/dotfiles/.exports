@@ -14,8 +14,8 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Export JDK environment variable used for build
-export JDK8=$(asdf where java liberica-8u342+7)
+export JDK8=$(asdf where java liberica-8u362+9)
 export JDK11=$(asdf where java liberica-11.0.16+8)
 export JDK16=$(asdf where java liberica-16.0.2+7)
-export JDK17=$(asdf where java liberica-17.0.4+8)
-export JDK18=$(asdf where java liberica-18.0.2+10)
+export JDK17=$(asdf where java liberica-17.0.6+10)
+export JDK18=$(asdf where java liberica-18.0.2.1+1)

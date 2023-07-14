@@ -9,6 +9,8 @@ echo "#################################"
 echo "# Setting Mac OS X defaults ... #"
 echo "#################################"
 echo
+echo "To see what gets configured, see this file https://github.com/gradle/ge-macstrap-config/blob/main/custom-scripts/post-install-4-osx-defaults.sh#L9"
+echo
 
 printf "\033[1mPlease select if you want to apply the custom Mac OSX configuration\033[0m:\n"
 echo "[1] Apply the configuration"
@@ -29,16 +31,6 @@ case $applyConfiguration in
         echo "We need sudo right to set some Mac OS X defaults."
         sudo true
 
-        # Set computer name (as done via System Preferences → Sharing)
-        printf "Enter the hostname (without any spaces): "
-
-        # read the hostname
-        hostname=$(readInput "default-host-name")
-        sudo scutil --set ComputerName "$hostname"
-        sudo scutil --set HostName "$hostname"
-        sudo scutil --set LocalHostName "$hostname"
-        sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$hostname"
-
         ###############################################################################
         echo
         printf "\t General UI/UX\n"
@@ -57,12 +49,6 @@ case $applyConfiguration in
 
         printf "\t- Always show scrollbars\n"
         defaults write NSGlobalDomain AppleShowScrollBars -string "Always\n"
-
-        printf "\t- Disabling OS X Gate Keeper\n"
-        printf "\t\t- (You'll be able to install any app you want from here on, not just Mac App Store apps)\n"
-        sudo spctl --master-disable
-        sudo defaults write /var/db/SystemPolicy-prefs.plist enabled -string no
-        defaults write com.apple.LaunchServices LSQuarantine -bool false
 
         printf "\t- Expanding the save panel by default\n"
         defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -85,9 +71,6 @@ case $applyConfiguration in
 
         printf "\t- Disabling the \"Are you sure you want to open this application?\" dialog\n"
         defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-        printf "\t- Check for software updates daily, not just once per week\n"
-        defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
         printf "\t- Disable smart quotes, smart dashes, period substitution, automatic capitalization and auto correct\n"
         defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -118,16 +101,6 @@ case $applyConfiguration in
 
         printf "\t- Show battery percentage in menu bar\n"
         defaults write com.apple.menuextra.battery ShowPercent -bool true
-
-        printf "\t- Show Bluetooth icon in menu bar\n"
-        defaults write com.apple.systemuiserver menuExtras -array \
-            "/System/Library/CoreServices/Menu Extras/Clock.menu" \
-            "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-            "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-            "/System/Library/CoreServices/Menu Extras/VPN.menu" \
-            "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-            "/System/Library/CoreServices/Menu Extras/Displays.menu" \
-            "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
 
         # Reload the menu bar to apply the changes
         killall SystemUIServer
@@ -235,10 +208,6 @@ case $applyConfiguration in
         printf "\t #################################\n"
         echo
         ###############################################################################
-
-        printf "\t- Requiring password immediately after sleep or screen saver begins\n"
-        defaults write com.apple.screensaver askForPassword -int 1
-        defaults write com.apple.screensaver askForPasswordDelay -int 0
 
         printf "\t- Enabling subpixel font rendering on non-Apple LCDs\n"
         defaults write NSGlobalDomain AppleFontSmoothing -int 1
@@ -745,6 +714,25 @@ case $applyConfiguration in
 
         # Disable continuous spell checking
         defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+
+        ###############################################################################
+        echo
+        printf "\t Google Chrome\n"
+        printf "\t #################################\n"
+        echo
+
+        printf "\t- Disable the all too sensitive backswipe on trackpads\n"
+        defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+
+        printf "\t- Disable the all too sensitive backswipe on Magic Mouse\n"
+        defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+
+        printf "\t- Use the system-native print preview dialog\n"
+        defaults write com.google.Chrome DisablePrintPreview -bool true
+
+        printf "\t- Expand the print dialog by default\n"
+        defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
+
 
         ###############################################################################
         echo

@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# Export PATH
-export PATH=$(brew --prefix)/bin:/usr/local/bin:$HOME/bin:/usr/local/sbin:$PATH
+# Put brew in front
+PATH=$(brew --prefix)/bin:/usr/local/bin:$HOME/bin:/usr/local/sbin:$PATH
 
 # Put brew's ruby in front
-export PATH=/usr/local/opt/ruby/bin:$PATH
+PATH=/usr/local/opt/ruby/bin:$PATH
 
 # Use gnu tools instead
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 
-# Add Google Chrome driver to the path
-export PATH=$HOME/.gradle/webdriver/chromedriver:$PATH
+# Export modified PATH
+export PATH

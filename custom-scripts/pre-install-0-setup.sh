@@ -32,9 +32,6 @@ if [ -z "${CI-}" ]; then
   fi
 fi
 
-# Install Rosetta 2
-softwareupdate --install-rosetta --agree-to-license
-
 # installs the app or binary with the according hooks
 installAppOrBinary() {
   if ! isFormulaInstalled "$1"; then

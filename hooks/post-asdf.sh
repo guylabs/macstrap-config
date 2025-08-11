@@ -21,7 +21,7 @@ asdf install java liberica-16.0.2+7 || true
 
 # Install Java 17 and set it globally as default
 asdf install java liberica-17.0.6+10 || true
-asdf global java liberica-17.0.6+10 || true
+asdf set --home java liberica-17.0.6+10 || true
 
 # Install Java 18
 asdf install java liberica-18.0.2.1+1 || true

@@ -9,7 +9,7 @@ echo "#################################"
 echo "# Setting Mac OS X defaults ... #"
 echo "#################################"
 echo
-echo "To see what gets configured, see this file https://github.com/gradle/ge-macstrap-config/blob/main/custom-scripts/post-install-4-osx-defaults.sh#L9"
+echo "To see what gets configured, see this file https://github.com/guylabs/macstrap-config/edit/master/custom-scripts/post-install-4-osx-defaults.sh#L9"
 echo
 
 printf "\033[1mPlease select if you want to apply the custom Mac OSX configuration\033[0m:\n"

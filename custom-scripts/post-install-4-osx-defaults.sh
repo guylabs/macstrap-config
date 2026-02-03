@@ -5,10 +5,11 @@ set -e
 
 # Show banner
 echo
-echo "#################################"
-echo "# Setting Mac OS X defaults ... #"
-echo "#################################"
+echo "##############################"
+echo "# Setting macOS defaults ... #"
+echo "##############################"
 echo
+echo "This step is optional and not required to have a working development environment. It applies settings to UI/UX, touchpad, screen, etc."
 echo "To see what gets configured, see this file https://github.com/guylabs/macstrap-config/edit/master/custom-scripts/post-install-4-osx-defaults.sh#L9"
 echo
 
@@ -28,7 +29,7 @@ case $applyConfiguration in
         osascript -e 'tell application "System Preferences" to quit'
 
         # Ask for the administrator password upfront
-        echo "We need sudo right to set some Mac OS X defaults."
+        echo "We need sudo right to set some macOS defaults."
         sudo true
 
         ###############################################################################
